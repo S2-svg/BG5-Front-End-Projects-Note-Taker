@@ -230,7 +230,7 @@ async function signInWithProvider(providerName) {
     localStorage.setItem("currentUser", existing.email);
     showAlert("success", `Signed in with ${providerName} — redirecting...`);
     const nextFromUrl = sanitizeNextUrl(
-      new URLSearchParams(location.search).get("next") || "index.html"
+      new URLSearchParams(location.search).get("next") || "./index.html"
     );
     setTimeout(() => (location.href = nextFromUrl), 900);
   } catch (err) {
@@ -282,7 +282,7 @@ function isValidEmail(email) {
 }
 
 function sanitizeNextUrl(next) {
-  if (!next) return "index.html";
+  if (!next) return "./index.html";
   try {
     const lower = String(next).toLowerCase();
     if (
@@ -294,10 +294,10 @@ function sanitizeNextUrl(next) {
     }
 
     if (lower.startsWith("javascript:") || lower.startsWith("data:"))
-      return "index.html";
+      return "./index.html";
     return next;
   } catch (err) {
-    return "index.html";
+    return "./index.html";
   }
 }
 function isValidPassword(password) {
@@ -541,7 +541,7 @@ async function handleRegisterSubmit(e) {
       if (text) text.textContent = "Password strength:";
 
       let nextFromUrl =
-        new URLSearchParams(location.search).get("next") || "index.html";
+        new URLSearchParams(location.search).get("next") || "./index.html";
       nextFromUrl = sanitizeNextUrl(nextFromUrl);
       setTimeout(() => {
         location.href = nextFromUrl;
@@ -587,7 +587,7 @@ async function handleLoginSubmit(e) {
     localStorage.setItem("currentUser", user.email);
     showAlert("success", "Signed in — redirecting...");
     let nextFromUrl =
-      new URLSearchParams(location.search).get("next") || "index.html";
+      new URLSearchParams(location.search).get("next") || "./index.html";
     nextFromUrl = sanitizeNextUrl(nextFromUrl);
     setTimeout(() => {
       location.href = nextFromUrl;
